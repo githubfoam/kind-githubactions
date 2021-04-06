@@ -1,0 +1,69 @@
+name: "Ubuntu kind CI workflow"
+
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+
+
+  ubuntu-latest-kind-job:
+    name: "ubuntu-latest kind job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status
+    - name: "Install k3d" 
+      run: make install_k3d    
+    - name: "Setup local cluster"
+      run: |
+        make create_cluster
+        make switch_context
+        make create_namespace               
+
+  ubuntu-1604-job:
+    name: "ubuntu-16.04 minikube job"
+    runs-on: ubuntu-16.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status  
+    - name: "Install k3d" 
+      run: make install_k3d    
+    - name: "Setup local cluster"
+      run: |
+        make create_cluster
+        make switch_context
+        make create_namespace  
+
+  ubuntu-1804-job:
+    name: "ubuntu-18.04 minikube job"
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status  
+    - name: "Install k3d" 
+      run: make install_k3d    
+    - name: "Setup local cluster"
+      run: |
+        make create_cluster
+        make switch_context
+        make create_namespace  
+
+  ubuntu-2004-job:
+    name: "ubuntu-20.04 minikube job"
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status 
+    - name: "Install k3d" 
+      run: make install_k3d    
+    - name: "Setup local cluster"
+      run: |
+        make create_cluster
+        make switch_context
+        make create_namespace  
