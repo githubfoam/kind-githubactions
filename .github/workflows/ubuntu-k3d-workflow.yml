@@ -1,4 +1,4 @@
-name: "Ubuntu kind CI workflow"
+name: "Ubuntu rancher k3d CI workflow"
 
 
 on:
@@ -14,13 +14,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
-      run: hostnamectl status
-    - name: "deploy kind" 
-      run: sudo make deploy-kind      
-    - name: "create cluster" 
-      run: sudo kind create cluster --config=app/kind-config.yaml             
-    - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind 
+      run: hostnamectl status  
+    - name: "Install k3d" 
+      run: make install_k3d
+    - name: "Setup local cluster"
+      run: |
+        make create_cluster
+        make switch_context
+        make create_namespace               
 
   ubuntu-1604-job:
     name: "ubuntu-16.04 minikube job"
