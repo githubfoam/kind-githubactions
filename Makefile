@@ -51,3 +51,6 @@ setup_argo_controller:
 
 create_python2_venv:
 	bash scripts/deploy-python2-venv.sh
+
+create_python2_venv_auto:
+	bash scripts/deploy-python2-venv-auto.sh

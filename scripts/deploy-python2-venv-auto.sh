@@ -20,10 +20,7 @@ apt-get update -qq
 pip install virtualenv
 pip install virtualenvwrapper
 
-which python
-which python2
-which python3
-virtualenv -p $(which python2) ~venv27
+virtualenv -p /usr/bin/python2.7 ~venv27
 
 source ~venv27/bin/activate
 pip install -r requirements.txt
