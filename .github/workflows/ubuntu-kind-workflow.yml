@@ -57,8 +57,8 @@ jobs:
     #   run: sudo make create_python2_venv    
     # - name: "create python 2x virtual environment auto"
     #   run: sudo make create_python2_venv 
-    - name: "create python 3x virtual environment"
-      run: sudo make create_python3_venv    
+    # - name: "create python 3x virtual environment"
+    #   run: sudo make create_python3_venv    
     - name: "create python 3x virtual environment auto"
       run: sudo make create_python3_venv         
     # - name: "Install k3d" 
@@ -69,19 +69,19 @@ jobs:
     #     make switch_context
     #     make create_namespace  
 
-  # ubuntu-1804-job:
-  #   name: "ubuntu-18.04 minikube job"
-  #   runs-on: ubuntu-18.04
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: "os fingerprinting"
-  #     run: hostnamectl status  
+  ubuntu-1804-job:
+    name: "ubuntu-18.04 minikube job"
+    runs-on: ubuntu-18.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status  
   #   - name: "create python 2x virtual environment"
   #     run: sudo make create_python2_venv    
   #   - name: "create python 2x virtual environment auto"
   #     run: sudo make create_python2_venv 
-  #   - name: "create python 3x virtual environment"
-  #     run: sudo make create_python3_venv    
+    - name: "create python 3x virtual environment"
+      run: sudo make create_python3_venv    
   #   - name: "create python 3x virtual environment auto"
   #     run: sudo make create_python3_venv        
     # - name: "Install k3d" 
