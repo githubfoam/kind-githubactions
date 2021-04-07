@@ -1,4 +1,4 @@
-name: "Ubuntu kind CI workflow"
+name: "Ubuntu python venv CI workflow"
 
 
 on:
@@ -15,29 +15,8 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status
-    - name: "create python 2x virtual environment"
-      run: sudo make create_python2_venv    
-    - name: "create python 2x virtual environment auto"
-      run: sudo make create_python2_venv 
-    - name: "create python 3x virtual environment"
-      run: sudo make create_python3_venv    
-    - name: "create python 3x virtual environment auto"
-      run: sudo make create_python3_venv                
-    # - name: "create python 3x virtual environment - apt"
-    #   run: sudo apt-get install python-virtualenv      #Package 'python-virtualenv' has no installation candidate
-    # - name: "create python 3x virtual environment - easy_install"
-    #   run: sudo apt-get install -yqq python-setuptools && sudo easy_install virtualenv  
-      # https://docs.conda.io/en/latest/miniconda.html
-    # - name: "create python 3x virtual environment - conda "
-    #   run: |
-    #     cd ~ 
-    #     curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh                 
-    #     sha256sum Miniconda3-latest-Linux-x86_64.sh
-    #     bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
-    #     source ~/.bashrc
-    #     conda list
-    #     conda create --name venv3 python=3 -y
-    #     conda activate venv3
+    - name: "deploy kind" 
+      run: sudo make deploy-kind      
     # - name: "Install k3d" 
     #   run: make install_k3d
     # - name: "Setup local cluster"
@@ -52,15 +31,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
-      run: hostnamectl status 
-    # - name: "create python 2x virtual environment"
-    #   run: sudo make create_python2_venv    
-    # - name: "create python 2x virtual environment auto"
-    #   run: sudo make create_python2_venv 
-    # - name: "create python 3x virtual environment"
-    #   run: sudo make create_python3_venv    
-    - name: "create python 3x virtual environment auto"
-      run: sudo make create_python3_venv         
+      run: hostnamectl status       
     # - name: "Install k3d" 
     #   run: make install_k3d    
     # - name: "Setup local cluster"
@@ -75,15 +46,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
-      run: hostnamectl status  
-  #   - name: "create python 2x virtual environment"
-  #     run: sudo make create_python2_venv    
-  #   - name: "create python 2x virtual environment auto"
-  #     run: sudo make create_python2_venv 
-    - name: "create python 3x virtual environment"
-      run: sudo make create_python3_venv    
-  #   - name: "create python 3x virtual environment auto"
-  #     run: sudo make create_python3_venv        
+      run: hostnamectl status          
     # - name: "Install k3d" 
     #   run: make install_k3d    
     # - name: "Setup local cluster"
@@ -92,21 +55,13 @@ jobs:
     #     make switch_context
     #     make create_namespace  
 
-  # ubuntu-2004-job:
-  #   name: "ubuntu-20.04 minikube job"
-  #   runs-on: ubuntu-20.04
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: "os fingerprinting"
-  #     run: hostnamectl status 
-  #   - name: "create python 2x virtual environment"
-  #     run: sudo make create_python2_venv    
-  #   - name: "create python 2x virtual environment auto"
-  #     run: sudo make create_python2_venv 
-  #   - name: "create python 3x virtual environment"
-  #     run: sudo make create_python3_venv    
-  #   - name: "create python 3x virtual environment auto"
-  #     run: sudo make create_python3_venv        
+  ubuntu-2004-job:
+    name: "ubuntu-20.04 minikube job"
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status         
     # - name: "Install k3d" 
     #   run: make install_k3d    
     # - name: "Setup local cluster"

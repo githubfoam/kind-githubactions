@@ -49,6 +49,12 @@ setup_argo_controller:
 	# Create a custom service account
 	kubectl apply -n $(NAMESPACE) --wait -f service-account.yaml
 
+# travis migration kind
+
+deploy-kind:
+	bash scripts/deploy-kind.sh
+
+# python virtual environments
 create_python2_venv:
 	bash scripts/deploy-python2-venv.sh
 
