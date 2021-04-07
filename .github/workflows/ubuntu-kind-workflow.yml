@@ -26,9 +26,18 @@ jobs:
     # - name: "create python 3x virtual environment - apt"
     #   run: sudo apt-get install python-virtualenv      #Package 'python-virtualenv' has no installation candidate
     - name: "create python 3x virtual environment - easy_install"
-      run: sudo easy_install virtualenv  
+      run: sudo apt-get install -yqq python-setuptools && sudo easy_install virtualenv  
+      # https://docs.conda.io/en/latest/miniconda.html
     - name: "create python 3x virtual environment - conda "
-      run: sudo easy_install virtualenv                     
+      run: |
+        cd tmp 
+        curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh                 
+        sha256sum Miniconda3-latest-Linux-x86_64.sh
+        bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
+        source ~/.bashrc
+        conda list
+        conda create --name venv3 python=3 -y
+        conda activate venv3
     # - name: "Install k3d" 
     #   run: make install_k3d
     # - name: "Setup local cluster"
