@@ -54,3 +54,9 @@ create_python2_venv:
 
 create_python2_venv_auto:
 	bash scripts/deploy-python2-venv-auto.sh
+
+create_python3_venv:
+	bash scripts/deploy-python3-venv.sh
+
+create_python3_venv_auto:
+	bash scripts/deploy-python3-venv-auto.sh	

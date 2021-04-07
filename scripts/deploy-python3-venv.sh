@@ -5,7 +5,7 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
-echo "============================deploy python 2x virtual environment============================================================="
+echo "============================deploy python 3x virtual environment============================================================="
     
 python -V #Python 3.8.5
 python3 -V #Python 3.8.5
@@ -23,7 +23,7 @@ pip install virtualenvwrapper
 which python
 which python2
 which python3
-virtualenv -p /usr/bin/python2.7 ~venv27
+virtualenv -p /usr/bin/python3.8 ~venv3x
 
 source ~venv27/bin/activate
 pip install -r requirements.txt
