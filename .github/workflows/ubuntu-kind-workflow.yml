@@ -21,9 +21,9 @@ jobs:
         python2 --version
         python3 -V
         python3 --version
-        apt-get install python-pip -yqq
-        pip install virtualenv
-        pip install virtualenvwrapper
+        sudo apt-get install python-pip -yqq
+        sudo pip install virtualenv
+        sudo pip install virtualenvwrapper
         virtualenv -p /usr/bin/python2.7 ~venv27
         pip --version
         pip3 --version
