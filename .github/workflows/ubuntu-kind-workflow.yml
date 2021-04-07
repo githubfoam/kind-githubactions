@@ -17,11 +17,12 @@ jobs:
       run: hostnamectl status
     - name: "create python 2x virtual environment"
       run: |
-        python -V
-        python2 --version
-        python3 -V
-        python3 --version
-        sudo apt-get install python-pip -yqq
+        python -V #Python 3.8.5
+        python2 --version #Python 2.7.18
+        python3 -V #Python 3.8.5
+        python3 --version #Python 3.8.5
+        sudo apt-get update -qq
+        sudo apt-get install python-pip -yqq #Unable to locate package python-pip
         sudo pip install virtualenv
         sudo pip install virtualenvwrapper
         virtualenv -p /usr/bin/python2.7 ~venv27
