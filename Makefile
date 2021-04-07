@@ -48,3 +48,6 @@ setup_argo_controller:
 	  --group=system:serviceaccounts
 	# Create a custom service account
 	kubectl apply -n $(NAMESPACE) --wait -f service-account.yaml
+
+create_python2_venv:
+	bash scripts/deploy-python2-venv.sh
