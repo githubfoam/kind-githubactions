@@ -30,7 +30,7 @@ jobs:
       # https://docs.conda.io/en/latest/miniconda.html
     - name: "create python 3x virtual environment - conda "
       run: |
-        cd tmp 
+        cd ~ 
         curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh                 
         sha256sum Miniconda3-latest-Linux-x86_64.sh
         bash Miniconda3-latest-Linux-x86_64.sh -b -p $HOME/miniconda
