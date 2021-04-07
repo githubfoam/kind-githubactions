@@ -25,8 +25,8 @@ jobs:
       run: sudo make create_python3_venv                
     # - name: "create python 3x virtual environment - apt"
     #   run: sudo apt-get install python-virtualenv      #Package 'python-virtualenv' has no installation candidate
-    - name: "create python 3x virtual environment - easy_install"
-      run: sudo apt-get install -yqq python-setuptools && sudo easy_install virtualenv  
+    # - name: "create python 3x virtual environment - easy_install"
+    #   run: sudo apt-get install -yqq python-setuptools && sudo easy_install virtualenv  
       # https://docs.conda.io/en/latest/miniconda.html
     - name: "create python 3x virtual environment - conda "
       run: |
