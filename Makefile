@@ -22,3 +22,31 @@ switch_context:
 
 create_namespace:
 	kubectl create ns $(NAMESPACE)
+
+setup_argo_controller:
+	kubectl apply -n $(NAMESPACE) --wait -f https://raw.githubusercontent.com/argoproj/argo/master/manifests/install.yaml
+	# Modify the containerRuntimeExecutor
+	kubectl -n $(NAMESPACE) apply --wait -f workflow-controller-configmap.yaml
+	kubectl create clusterrolebinding serviceaccounts-cluster-admin \
+	  --clusterrole=cluster-admin \
+	  --group=system:serviceaccounts
+	# Create a custom service account
+	kubectl apply -n $(NAMESPACE) --wait -f service-account.yaml
+
+# travis migration kind
+
+deploy-kind:
+	bash scripts/deploy-kind.sh
+
+# python virtual environments
+create_python2_venv:
+	bash scripts/deploy-python2-venv.sh
+
+create_python2_venv_auto:
+	bash scripts/deploy-python2-venv-auto.sh
+
+create_python3_venv:
+	bash scripts/deploy-python3-venv.sh
+
+create_python3_venv_auto:
+	bash scripts/deploy-python3-venv-auto.sh	
