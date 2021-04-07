@@ -55,8 +55,8 @@ jobs:
       run: hostnamectl status 
     # - name: "create python 2x virtual environment"
     #   run: sudo make create_python2_venv    
-    - name: "create python 2x virtual environment auto"
-      run: sudo make create_python2_venv 
+    # - name: "create python 2x virtual environment auto"
+    #   run: sudo make create_python2_venv 
     - name: "create python 3x virtual environment"
       run: sudo make create_python3_venv    
     - name: "create python 3x virtual environment auto"
