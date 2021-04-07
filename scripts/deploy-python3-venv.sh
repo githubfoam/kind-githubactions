@@ -18,6 +18,7 @@ apt-get update -qq
 # sudo apt-get install python-pip -yqq #Unable to locate package python-pip
 
 pip install virtualenv
+virtualenv --version
 pip install virtualenvwrapper
 
 which python
@@ -36,5 +37,5 @@ pip3 --version #pip 20.0.2 from /usr/lib/python3/dist-packages/pip (python 3.8)
 
 deactivate 
 
-echo "============================deploy python 2x virtual environment============================================================="
+echo "============================deploy python 3x virtual environment============================================================="
     

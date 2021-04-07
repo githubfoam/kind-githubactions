@@ -23,17 +23,12 @@ jobs:
       run: sudo make create_python3_venv    
     - name: "create python 3x virtual environment auto"
       run: sudo make create_python3_venv                
-    # - name: "create python 3x virtual environment"
-    #   run: |
-    #     python -V
-    #     python2 --version
-    #     python3 -V
-    #     python3 --version
-    #     pip3 install virtualenv
-    #     pip3 --version
-    #     virtualenv -p $(which python3) ~venvpy3
-    #     source ~venvpy3/bin/activate
-    #     pip install -r requirements.txt              
+    - name: "create python 3x virtual environment - apt"
+      run: sudo apt-get install python-virtualenv      
+    - name: "create python 3x virtual environment - easy_install"
+      run: sudo easy_install virtualenv  
+    - name: "create python 3x virtual environment - conda "
+      run: sudo easy_install virtualenv                     
     # - name: "Install k3d" 
     #   run: make install_k3d
     # - name: "Setup local cluster"

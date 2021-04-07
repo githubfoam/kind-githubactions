@@ -18,6 +18,7 @@ apt-get update -qq
 # sudo apt-get install python-pip -yqq #Unable to locate package python-pip
 
 pip install virtualenv
+virtualenv --version
 pip install virtualenvwrapper
 
 which python
