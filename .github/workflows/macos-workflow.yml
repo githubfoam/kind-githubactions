@@ -84,8 +84,10 @@ jobs:
       # https://kind.sigs.k8s.io/docs/user/quick-start/                              
       - name: "On macOS via Homebrew"
         run: brew install kind   
-      - name: "see the list of kind clusters"
-        run: kind get clusters #see the list of kind clusters
+        # ERROR: failed to list clusters: command "docker ps -a --filter label=io.x-k8s.kind.cluster --format '{{.Label "io.x-k8s.kind.cluster"}}'" failed with error: 
+        # exec: "docker": executable file not found in $PATH
+      # - name: "see the list of kind clusters"
+      #   run: kind get clusters #see the list of kind clusters
 
   macos-latest-kind-macports:
       name: "kind On macOS via MacPorts - macos-latest 10.15.7"
