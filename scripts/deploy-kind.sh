@@ -5,10 +5,12 @@ set -o nounset
 set -o xtrace
 # set -eox pipefail #safety for script
 
+# https://kind.sigs.k8s.io/docs/user/quick-start/
 echo "=============================deploy kind============================================================="
 
 docker version
-export KIND_VERSION="0.8.1"
+# export KIND_VERSION="0.8.1"
+export KIND_VERSION="0.11.1"
 
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v$KIND_VERSION/kind-$(uname)-amd64
 chmod +x ./kind
