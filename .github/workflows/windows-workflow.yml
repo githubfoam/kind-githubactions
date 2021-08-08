@@ -1,0 +1,137 @@
+
+name: "windows kind CI workflow"
+
+on:
+  push:
+    branches: [ dev ]
+  # schedule:
+  #     # https://crontab.guru/
+  #     # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+  #     - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
+
+
+jobs:
+
+  windows-latest-pwsh-kind-choco:
+    name: "kind  windows-latest Microsoft Windows Server 2019 Datacenter pwsh"  
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1     
+    - name: "osfingerprinting"
+      run: systeminfo | more  
+    - name: "check curl version"
+      run: curl --version      
+    - name: "install curl"
+      run: choco install curl      
+    # https://minikube.sigs.k8s.io/docs/start/
+    - name: "Download the latest release"
+      run: choco install kind
+    # - name: "Add the binary in to your PATH."
+    #   run: |
+    #     # Make sure to run PowerShell as Administrator
+    #     $oldpath=[Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine)
+    #     if($oldpath -notlike "*;C:\minikube*"){`
+    #       [Environment]::SetEnvironmentVariable("Path", $oldpath+";C:\minikube", [EnvironmentVariableTarget]::Machine)`
+    #     }
+    #     # Profile "minikube" not found. Run "minikube profile list" to view all profiles.
+    #     minikube profile list
+    #     minikube version --short
+    #     minikube version --components
+
+
+  windows-latest-pwsh-kind:
+    name: "kind windows-latest Microsoft Windows Server 2019 Datacenter pwsh"  
+    runs-on: windows-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v1     
+    - name: "osfingerprinting"
+      run: systeminfo | more  
+    - name: "check curl version"
+      run: curl --version      
+    - name: "install curl"
+      run: choco install curl      
+    # https://minikube.sigs.k8s.io/docs/start/
+    - name: "Download the kind release"
+      run: |
+        curl.exe -Lo kind-windows-amd64.exe https://kind.sigs.k8s.io/dl/v0.11.1/kind-windows-amd64
+        New-Item -Path "c:\" -Name "kind" -ItemType "directory" -Force
+        Move-Item .\kind-windows-amd64.exe c:\kind\kind.exe
+        # curl -Lo minikube.exe https://github.com/kubernetes/minikube/releases/latest/download/minikube-windows-amd64.exe
+        # New-Item -Path "c:\" -Name "minikube" -ItemType "directory" -Force
+        # Move-Item .\minikube.exe c:\minikube\minikube.exe -Force
+    # - name: "Add the binary in to your PATH."
+    #   run: |
+    #     # Make sure to run PowerShell as Administrator
+    #     $oldpath=[Environment]::GetEnvironmentVariable("Path", [EnvironmentVariableTarget]::Machine)
+    #     if($oldpath -notlike "*;C:\minikube*"){`
+    #       [Environment]::SetEnvironmentVariable("Path", $oldpath+";C:\minikube", [EnvironmentVariableTarget]::Machine)`
+    #     }
+    #     # Profile "minikube" not found. Run "minikube profile list" to view all profiles.
+    #     minikube profile list
+    #     minikube version --short
+    #     minikube version --components
+
+  # windows-latest-pwsh-osquery:
+  #   name: "windows-latest Microsoft Windows Server 2019 Datacenter pwsh"  
+  #   runs-on: windows-latest
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v1   
+  #   - name: "Install osquery - powershell script" 
+  #     run: .\scripts\Install_Osquery.ps1
+  #     shell: pwsh     
+  #   - name: "DFIR osquery - powershell script" 
+  #     run: .\scripts\DFIR_Osquery.ps1
+  #     shell: pwsh                                          
+  #   - name: "check if server is virtual"
+  #     run: Systeminfo | findstr /i model   
+  #   - name: "check the PROCESSOR_ARCHITECTURE environment variable.64-bit systems will say AMD64 and 32-bit systems should say x86"
+  #     run: wmic OS get OSArchitecture     
+  #   - name: "osfingerprinting"
+  #     run: systeminfo | more  
+  #   - name: "display all processes, executable path"
+  #     run: wmic process list full         
+  #   - name: "list of running services"
+  #     run: tasklist         
+  #   - name: "list of all processes along with their corresponding PID, and services that are tied to them"
+  #     run: tasklist /svc  
+  #   - name: "look for unusual services"
+  #     run: net start                       
+  #   - name: "query unusual services"
+  #     run: sc query 
+    
+
+
+  
+
+  # windows-2016-pwsh-osquery:
+  #   name: "Microsoft Windows Server 2016 Datacenter pwsh"
+  #   runs-on: windows-2016
+  #   steps:
+  #   - name: Checkout
+  #     uses: actions/checkout@v1
+  #   - name: "Install osquery - powershell script" 
+  #     run: .\scripts\Install_Osquery.ps1
+  #     shell: pwsh       
+  #   - name: "DFIR osquery - powershell script" 
+  #     run: .\scripts\DFIR_Osquery.ps1
+  #     shell: pwsh         
+  #   - name: "check if server is virtual"
+  #     run: Systeminfo | findstr /i model   
+  #   - name: "check the PROCESSOR_ARCHITECTURE environment variable.64-bit systems will say AMD64 and 32-bit systems should say x86"
+  #     run: wmic OS get OSArchitecture     
+  #   - name: "osfingerprinting"
+  #     run: systeminfo | more  
+  #   - name: "display all processes, executable path"
+  #     run: wmic process list full         
+  #   - name: "list of running services"
+  #     run: tasklist         
+  #   - name: "list of all processes along with their corresponding PID, and services that are tied to them"
+  #     run: tasklist /svc  
+  #   - name: "look for unusual services"
+  #     run: net start                       
+  #   - name: "query unusual services"
+  #     run: sc query        
