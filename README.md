@@ -1,2 +1,6 @@
 # kind-githubactions
-kind k8s pipeline 
+kind  pipeline 
+
+~~~~
+https://minikube.sigs.k8s.io/docs/start/
+~~~~
