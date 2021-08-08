@@ -3,11 +3,11 @@ name: "windows kind CI workflow"
 
 on:
   push:
-    branches: [ test ]
-  # schedule:
-  #     # https://crontab.guru/
-  #     # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
-  #     - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+    branches: [ main ]
+  schedule:
+      # https://crontab.guru/
+      # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+      - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
 
 
 

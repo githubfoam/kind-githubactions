@@ -9,7 +9,6 @@ set -o xtrace
 echo "=============================deploy kind============================================================="
 
 docker version
-# export KIND_VERSION="0.8.1"
 export KIND_VERSION="0.11.1"
 
 curl -Lo ./kind https://kind.sigs.k8s.io/dl/v$KIND_VERSION/kind-$(uname)-amd64
