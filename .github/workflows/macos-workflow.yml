@@ -39,16 +39,18 @@ jobs:
         run: system_profiler | more  
       - name: "osfingerprinting"
         run: uname -a     
-      # https://kind.sigs.k8s.io/docs/user/quick-start/                              
-      - name: "On macOS via bash"
-        run: |
-          export KIND_VERSION="0.11.1"
-          curl -Lo ./kind https://kind.sigs.k8s.io/dl/v$KIND_VERSION/kind-$(uname)-amd64
-          chmod +x ./kind
-          mv ./kind /usr/local/bin/kind
-          kind get clusters #see the list of kind clusters
-          kind get clusters
-          kubectl config get-contexts #kind is prefixed to the context and cluster names, for example: kind-istio-testing
+      # https://kind.sigs.k8s.io/docs/user/quick-start/ 
+      # ERROR: failed to list clusters: command "docker ps -a --filter label=io.x-k8s.kind.cluster --format '{{.Label "io.x-k8s.kind.cluster"}}'" failed with error: 
+      # exec: "docker": executable file not found in $PATH                             
+      # - name: "On macOS via bash"
+      #   run: |
+      #     export KIND_VERSION="0.11.1"
+      #     curl -Lo ./kind https://kind.sigs.k8s.io/dl/v$KIND_VERSION/kind-$(uname)-amd64
+      #     chmod +x ./kind
+      #     mv ./kind /usr/local/bin/kind
+      #     kind get clusters #see the list of kind clusters
+      #     kind get clusters
+      #     kubectl config get-contexts #kind is prefixed to the context and cluster names, for example: kind-istio-testing
 
 
   macos-latest-kind-homebrew:
@@ -82,6 +84,8 @@ jobs:
       # https://kind.sigs.k8s.io/docs/user/quick-start/                              
       - name: "On macOS via Homebrew"
         run: brew install kind   
+      - name: "see the list of kind clusters"
+        run: kind get clusters #see the list of kind clusters
 
   macos-latest-kind-macports:
       name: "kind On macOS via MacPorts - macos-latest 10.15.7"
@@ -111,9 +115,10 @@ jobs:
         run: system_profiler | more  
       - name: "osfingerprinting"
         run: uname -a     
-      # https://kind.sigs.k8s.io/docs/user/quick-start/                              
-      - name: "On macOS via MacPorts"
-        run: sudo port selfupdate && sudo port install kind
+      # https://kind.sigs.k8s.io/docs/user/quick-start/    
+      # sudo: port: command not found                          
+      # - name: "On macOS via MacPorts"
+      #   run: sudo port selfupdate && sudo port install kind
 
   # macos-110:
   #     name: "macos-11.0"
