@@ -26,19 +26,19 @@ jobs:
     - name: "kubectl cluster-info" 
       run: sudo kubectl cluster-info --context kind-kind 
 
-  ubuntu-1604-job:
-    name: "ubuntu-16.04 minikube job"
-    runs-on: ubuntu-16.04
+  ubuntu-2004-job:
+    name: "ubuntu-20.04 minikube job"
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
-      run: hostnamectl status       
+      run: hostnamectl status         
     - name: "deploy kind" 
       run: sudo make deploy-kind      
     - name: "create cluster" 
       run: sudo kind create cluster --config=app/kind-config.yaml             
     - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind
+      run: sudo kubectl cluster-info --context kind-kind  
 
   ubuntu-1804-job:
     name: "ubuntu-18.04 minikube job"
@@ -54,16 +54,18 @@ jobs:
     - name: "kubectl cluster-info" 
       run: sudo kubectl cluster-info --context kind-kind 
 
-  ubuntu-2004-job:
-    name: "ubuntu-20.04 minikube job"
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: "os fingerprinting"
-      run: hostnamectl status         
-    - name: "deploy kind" 
-      run: sudo make deploy-kind      
-    - name: "create cluster" 
-      run: sudo kind create cluster --config=app/kind-config.yaml             
-    - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind  
+  #deprecated
+  # ubuntu-1604-job:
+  #   name: "ubuntu-16.04 minikube job"
+  #   runs-on: ubuntu-16.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: "os fingerprinting"
+  #     run: hostnamectl status       
+  #   - name: "deploy kind" 
+  #     run: sudo make deploy-kind      
+  #   - name: "create cluster" 
+  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #   - name: "kubectl cluster-info" 
+  #     run: sudo kubectl cluster-info --context kind-kind
+
