@@ -23,6 +23,6 @@ nodes:
 # the control plane node config
 - role: control-plane
 # the three workers
-- role: worker
-- role: worker
-- role: worker
+- role: worker-1
+- role: worker-2
+- role: worker-3

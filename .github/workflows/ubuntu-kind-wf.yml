@@ -36,7 +36,6 @@ jobs:
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
         mv ./kind /usr/local/bin/kind
-        ls -lai    
         kind create cluster --config app/kind-example-config.yaml        
         kind get clusters
         # kubectl cluster-info --context kind-kind
