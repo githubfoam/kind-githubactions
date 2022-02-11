@@ -47,7 +47,7 @@ jobs:
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
         mv ./kind /usr/local/bin/kind
-        kind create cluster --config app/kind-example-config.yaml        
+        kind create cluster --config platform/kind-example-config.yaml        
         kind get clusters
         # kubectl cluster-info --context kind-kind
         # kubectl cluster-info --context kind-kind-2
@@ -64,12 +64,12 @@ jobs:
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
         mv ./kind /usr/local/bin/kind    
-        kind create cluster --config app/kind-example-config.yaml        
+        kind create cluster --config platform/kind-example-config.yaml        
         kind get clusters
         # kubectl cluster-info --context kind-kind
         # kubectl cluster-info --context kind-kind-2        
     # - name: "create cluster" 
-    #   run: sudo kind create cluster --config=app/kind-config.yaml             
+    #   run: sudo kind create cluster --config=platform/kind-config.yaml             
     # - name: "kubectl cluster-info" 
     #   run: sudo kubectl cluster-info --context kind-kind 
 
@@ -83,7 +83,7 @@ jobs:
   #   - name: "deploy kind" 
   #     run: sudo make deploy-kind      
   #   - name: "create cluster" 
-  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #     run: sudo kind create cluster --config=platform/kind-config.yaml             
   #   - name: "kubectl cluster-info" 
   #     run: sudo kubectl cluster-info --context kind-kind  
 
@@ -97,7 +97,7 @@ jobs:
   #   - name: "deploy kind" 
   #     run: sudo make deploy-kind      
   #   - name: "create cluster" 
-  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #     run: sudo kind create cluster --config=platform/kind-config.yaml             
   #   - name: "kubectl cluster-info" 
   #     run: sudo kubectl cluster-info --context kind-kind 
 
@@ -112,7 +112,7 @@ jobs:
   #   - name: "deploy kind" 
   #     run: sudo make deploy-kind      
   #   - name: "create cluster" 
-  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #     run: sudo kind create cluster --config=platform/kind-config.yaml             
   #   - name: "kubectl cluster-info" 
   #     run: sudo kubectl cluster-info --context kind-kind
 

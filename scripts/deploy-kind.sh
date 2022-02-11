@@ -46,3 +46,22 @@ kubectl get namespaces
 kubectl --namespace kube-system get pods
 
 echo "=============================deploy kind============================================================="
+echo "=============================deploy nginx============================================================="
+
+# deploy the Kubernetes supported ingress NGINX controller to work as a reverse proxy and load balancer:
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/main/deploy/static/provider/kind/deploy.yaml
+
+# Deploying a Service Locally
+# use a simple http-echo web server available as a docker image.
+# https://hub.docker.com/r/hashicorp/http-echo/
+
+#  deploy service
+#  cluster integrates with the ingress NGINX controller
+kubectl apply -f baeldung-service.yaml
+# check the status of the services
+kubectl get services
+
+# test 
+curl localhost/baeldung
+
+echo "=============================deploy nginx============================================================="
