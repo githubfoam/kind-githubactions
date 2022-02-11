@@ -1,7 +1,7 @@
 # kind-githubactions
 kind  pipeline 
 
-[![Ubuntu kind CI workflow](https://github.com/githubfoam/kind-githubactions/actions/workflows/ubuntu-kind-workflow.yml/badge.svg?branch=main)](https://github.com/githubfoam/kind-githubactions/actions/workflows/ubuntu-kind-workflow.yml)  
+[![kind Ubuntu CI workflow](https://github.com/githubfoam/kind-githubactions/actions/workflows/ubuntu-kind-wf.yml/badge.svg)](https://github.com/githubfoam/kind-githubactions/actions/workflows/ubuntu-kind-wf.yml) 
 
 
 ~~~~
