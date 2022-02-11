@@ -1,0 +1,27 @@
+name: "make kind CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+  schedule:
+      # https://crontab.guru/
+      # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+      # - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
+
+jobs:
+
+
+  ubuntu-latest-kind-job:
+    name: "make kind ubuntu-latest job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinting"
+      run: hostnamectl status
+    - name: "deploy kind" 
+      run: sudo make deploy-kind      
+
+
+  

@@ -3,11 +3,12 @@ name: "Ubuntu kind CI workflow"
 
 on:
   push:
-    branches: [ main ]
+    branches: [ test ]
   schedule:
       # https://crontab.guru/
       # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
-      - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+      # - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
 
 jobs:
 
@@ -19,40 +20,67 @@ jobs:
     - uses: actions/checkout@v2
     - name: "os fingerprinting"
       run: hostnamectl status
-    - name: "deploy kind" 
-      run: sudo make deploy-kind      
-    - name: "create cluster" 
-      run: sudo kind create cluster --config=app/kind-config.yaml             
-    - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind 
+      # https://kind.sigs.k8s.io/docs/user/quick-start/
+    - name: "Installing From Release Binaries" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        kind create cluster # Default cluster context name is `kind`.
+        kind create cluster --name kind-2
+        kind get clusters
+        kubectl cluster-info --context kind-kind
+        kubectl cluster-info --context kind-kind-2
+    - name: "Installing From Release Binaries with cfg yaml" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        kind create cluster --config /app/kind-example-config.yaml        
+        kind get clusters
+        # kubectl cluster-info --context kind-kind
+        # kubectl cluster-info --context kind-kind-2
+    - name: "Installing From Release Binaries with cfg yaml multi controlplane" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        kind create cluster --config /app/kind-example-config.yaml        
+        kind get clusters
+        # kubectl cluster-info --context kind-kind
+        # kubectl cluster-info --context kind-kind-2        
+    # - name: "create cluster" 
+    #   run: sudo kind create cluster --config=app/kind-config.yaml             
+    # - name: "kubectl cluster-info" 
+    #   run: sudo kubectl cluster-info --context kind-kind 
 
-  ubuntu-2004-job:
-    name: "ubuntu-20.04 minikube job"
-    runs-on: ubuntu-20.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: "os fingerprinting"
-      run: hostnamectl status         
-    - name: "deploy kind" 
-      run: sudo make deploy-kind      
-    - name: "create cluster" 
-      run: sudo kind create cluster --config=app/kind-config.yaml             
-    - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind  
+  # ubuntu-2004-job:
+  #   name: "ubuntu-20.04 minikube job"
+  #   runs-on: ubuntu-20.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: "os fingerprinting"
+  #     run: hostnamectl status         
+  #   - name: "deploy kind" 
+  #     run: sudo make deploy-kind      
+  #   - name: "create cluster" 
+  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #   - name: "kubectl cluster-info" 
+  #     run: sudo kubectl cluster-info --context kind-kind  
 
-  ubuntu-1804-job:
-    name: "ubuntu-18.04 minikube job"
-    runs-on: ubuntu-18.04
-    steps:
-    - uses: actions/checkout@v2
-    - name: "os fingerprinting"
-      run: hostnamectl status          
-    - name: "deploy kind" 
-      run: sudo make deploy-kind      
-    - name: "create cluster" 
-      run: sudo kind create cluster --config=app/kind-config.yaml             
-    - name: "kubectl cluster-info" 
-      run: sudo kubectl cluster-info --context kind-kind 
+  # ubuntu-1804-job:
+  #   name: "ubuntu-18.04 minikube job"
+  #   runs-on: ubuntu-18.04
+  #   steps:
+  #   - uses: actions/checkout@v2
+  #   - name: "os fingerprinting"
+  #     run: hostnamectl status          
+  #   - name: "deploy kind" 
+  #     run: sudo make deploy-kind      
+  #   - name: "create cluster" 
+  #     run: sudo kind create cluster --config=app/kind-config.yaml             
+  #   - name: "kubectl cluster-info" 
+  #     run: sudo kubectl cluster-info --context kind-kind 
 
   #deprecated
   # ubuntu-1604-job:
