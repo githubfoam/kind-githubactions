@@ -27,10 +27,12 @@ jobs:
         mv ./kind /usr/local/bin/kind    
         # Default cluster context name is `kind`.
         kind create cluster 
-        kind create cluster --name kind-2
-        kind get clusters
+        kind create cluster --name kind-3
+        kind get clusters       
+        #kind is prefixed to the context and cluster names, for example: kind-istio-testing
+        kubectl config get-contexts 
         kubectl cluster-info --context kind-kind
-        kubectl cluster-info --context kind-kind-2
+        kubectl cluster-info --context kind-kind-3
 
   kind-binary-cfg-ubuntu-latest-job:
     name: "Installing From Release Binaries with cfg yaml ubuntu-latest job"
