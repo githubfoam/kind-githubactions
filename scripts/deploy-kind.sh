@@ -26,6 +26,8 @@ kubectl cluster-info --context kind-kind-2
 
 kubectl config get-contexts #kind is prefixed to the context and cluster names, for example: kind-istio-testing
 
-kind delete kind-2
+# Deleting a Cluster
+kind delete cluster kind-2
+kind get clusters #see the list of kind clusters
 
 echo "=============================deploy kind============================================================="

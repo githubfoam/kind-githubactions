@@ -12,8 +12,7 @@ on:
 
 jobs:
 
-
-  ubuntu-latest-kind-job:
+  kind-binary-ubuntu-latest-job:
     name: "ubuntu-latest kind job"
     runs-on: ubuntu-latest
     steps:
@@ -31,6 +30,15 @@ jobs:
         kind get clusters
         kubectl cluster-info --context kind-kind
         kubectl cluster-info --context kind-kind-2
+
+  kind-binary-cfg-ubuntu-latest-job:
+    name: "ubuntu-latest kind job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinti  ng"
+      run: hostnamectl status
+      # https://kind.sigs.k8s.io/docs/user/quick-start/
     - name: "Installing From Release Binaries with cfg yaml" 
       run: |
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
@@ -40,6 +48,14 @@ jobs:
         kind get clusters
         # kubectl cluster-info --context kind-kind
         # kubectl cluster-info --context kind-kind-2
+
+  kind-binary-cfg-multi-controlplane-ubuntu-latest-job:
+    name: "ubuntu-latest kind job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinti  ng"
+      run: hostnamectl status
     - name: "Installing From Release Binaries with cfg yaml multi controlplane" 
       run: |
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
