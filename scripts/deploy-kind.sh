@@ -17,6 +17,7 @@ mv ./kind /usr/local/bin/kind
 
 # create two clusters
 kind create cluster # Default cluster context name is `kind`.
+# If the flag --name is not specified, kind will use the default cluster context name kind
 kind create cluster --name kind-2
 
 kind get clusters #see the list of kind clusters
@@ -27,7 +28,8 @@ kubectl cluster-info --context kind-kind-2
 kubectl config get-contexts #kind is prefixed to the context and cluster names, for example: kind-istio-testing
 
 # Deleting a Cluster
-kind delete cluster kind-2
+# If the flag --name is not specified, kind will use the default cluster context name kind
+kind delete cluster --name kind-2
 kind get clusters #see the list of kind clusters
 
 echo "=============================deploy kind============================================================="

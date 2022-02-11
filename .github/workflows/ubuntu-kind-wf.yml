@@ -13,7 +13,7 @@ on:
 jobs:
 
   kind-binary-ubuntu-latest-job:
-    name: "ubuntu-latest kind job"
+    name: "Installing From Release Binaries ubuntu-latest job"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -25,14 +25,15 @@ jobs:
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
         mv ./kind /usr/local/bin/kind    
-        kind create cluster # Default cluster context name is `kind`.
+        # Default cluster context name is `kind`.
+        kind create cluster 
         kind create cluster --name kind-2
         kind get clusters
         kubectl cluster-info --context kind-kind
         kubectl cluster-info --context kind-kind-2
 
   kind-binary-cfg-ubuntu-latest-job:
-    name: "ubuntu-latest kind job"
+    name: "Installing From Release Binaries with cfg yaml ubuntu-latest job"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -50,7 +51,7 @@ jobs:
         # kubectl cluster-info --context kind-kind-2
 
   kind-binary-cfg-multi-controlplane-ubuntu-latest-job:
-    name: "ubuntu-latest kind job"
+    name: "Installing From Release Binaries with cfg yaml multi controlplane ubuntu-latest job"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -61,7 +62,7 @@ jobs:
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
         mv ./kind /usr/local/bin/kind    
-        kind create cluster --config /app/kind-example-config.yaml        
+        kind create cluster --config app/kind-example-config.yaml        
         kind get clusters
         # kubectl cluster-info --context kind-kind
         # kubectl cluster-info --context kind-kind-2        
