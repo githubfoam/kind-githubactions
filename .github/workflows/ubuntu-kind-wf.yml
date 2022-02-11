@@ -18,7 +18,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: "os fingerprinting"
+    - name: "os fingerprinti  ng"
       run: hostnamectl status
       # https://kind.sigs.k8s.io/docs/user/quick-start/
     - name: "Installing From Release Binaries" 
@@ -35,8 +35,9 @@ jobs:
       run: |
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
-        mv ./kind /usr/local/bin/kind    
-        kind create cluster --config /app/kind-example-config.yaml        
+        mv ./kind /usr/local/bin/kind
+        ls -lai    
+        kind create cluster --config app/kind-example-config.yaml        
         kind get clusters
         # kubectl cluster-info --context kind-kind
         # kubectl cluster-info --context kind-kind-2
