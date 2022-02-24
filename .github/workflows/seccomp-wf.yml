@@ -1,0 +1,43 @@
+name: "seccomp kind Ubuntu CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+  # schedule:
+      # https://crontab.guru/
+      # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+      # - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
+
+jobs:
+
+# https://kubernetes.io/docs/tutorials/security/seccomp/
+  seccomp-kind-ubuntu-latest-job:
+    name: "Restrict a Container's Syscalls with seccomp job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinti  ng"
+      run: hostnamectl status
+      # https://kind.sigs.k8s.io/docs/user/quick-start/
+    - name: "Installing From Release Binaries" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        # Default cluster context name is `kind`.
+        kind create cluster 
+        kind create cluster --name kind-3
+        kind get clusters       
+        #kind is prefixed to the context and cluster names, for example: kind-istio-testing
+        kubectl config get-contexts 
+        kubectl cluster-info --context kind-kind
+        kubectl cluster-info --context kind-kind-3
+        mkdir ./profiles
+        curl -L -o profiles/audit.json https://k8s.io/examples/pods/security/seccomp/profiles/audit.json
+        curl -L -o profiles/violation.json https://k8s.io/examples/pods/security/seccomp/profiles/violation.json
+        curl -L -o profiles/fine-grained.json https://k8s.io/examples/pods/security/seccomp/profiles/fine-grained.json
+        ls profiles
+
+  
