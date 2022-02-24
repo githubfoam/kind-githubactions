@@ -35,6 +35,8 @@ jobs:
         # Kubernetes version is at least v1.4 -- Kubernetes support for AppArmor was added in v1.4.
         # verify the Kubelet version of nodes
         kubectl get nodes -o=jsonpath=$'{range .items[*]}{@.metadata.name}: {@.status.nodeInfo.kubeletVersion}\n{end}'
-        # check whether the module is enabled
+        # check whether the apparmor module is enabled
         cat /sys/module/apparmor/parameters/enabled
+        # verify AppArmor support on nodes by checking the node ready condition message
+        kubectl get nodes -o=jsonpath=$'{range .items[*]}{@.metadata.name}: {.status.conditions[?(@.reason=="KubeletReady")].message}\n{end}'
   
