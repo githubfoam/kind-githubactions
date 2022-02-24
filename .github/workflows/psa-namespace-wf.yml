@@ -1,4 +1,4 @@
-name: "Pod Security Standards kind Ubuntu CI workflow"
+name: "Pod Security Standards Namespace  Level workflow"
 
 
 on:
@@ -12,9 +12,9 @@ on:
 
 jobs:
 
-# https://kubernetes.io/docs/tutorials/security/cluster-level-pss/
-  psa-kind-ubuntu-latest-job:
-    name: "Restrict a Container's Syscalls with seccomp job"
+# https://kubernetes.io/docs/tutorials/security/ns-level-pss/
+  psa-namespace-kind-ubuntu-latest-job:
+    name: "Apply Pod Security Standards at the Namespace Level"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -32,8 +32,10 @@ jobs:
         # kubectl config get-contexts 
         # kubectl cluster-info --context kind-kind
         # Create a cluster with no Pod Security Standards applied:
-        kind create cluster --name psa-wo-cluster-pss --image kindest/node:v1.23.0
+        kind create cluster --name psa-ns-level --image kindest/node:v1.23.0
         kind get clusters       
         kubectl config get-contexts 
+        kubectl cluster-info --context kind-psa-ns-level
         # kubectl cluster-info --context kind-kind
+        kubectl create ns example
   

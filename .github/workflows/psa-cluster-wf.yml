@@ -1,0 +1,39 @@
+name: "Pod Security Standards Cluster Level workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+  # schedule:
+      # https://crontab.guru/
+      # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+      # - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
+
+jobs:
+
+# https://kubernetes.io/docs/tutorials/security/cluster-level-pss/
+  psa-cluster-kind-ubuntu-latest-job:
+    name: "Apply Pod Security Standards at the Cluster Level"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinti  ng"
+      run: hostnamectl status
+      # https://kind.sigs.k8s.io/docs/user/quick-start/
+    - name: "Apply Pod Security Standards at the Cluster Level" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        # Default cluster context name is `kind`.
+        # kind create cluster 
+        # kind get clusters       
+        # kubectl config get-contexts 
+        # kubectl cluster-info --context kind-kind
+        # Create a cluster with no Pod Security Standards applied:
+        kind create cluster --name psa-wo-cluster-pss --image kindest/node:v1.23.0
+        kind get clusters       
+        kubectl config get-contexts 
+        kubectl cluster-info --context kind-psa-wo-cluster-pss 
+  

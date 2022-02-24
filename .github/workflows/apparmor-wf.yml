@@ -1,0 +1,40 @@
+name: "apparmor kind Ubuntu CI workflow"
+
+
+on:
+  push:
+    branches: [ test ]
+  # schedule:
+      # https://crontab.guru/
+      # https://docs.github.com/en/actions/reference/events-that-trigger-workflows
+      # - cron:  '0 0 * * FRI' ##execution of a task in the first minute of the month  
+
+
+jobs:
+
+# https://kubernetes.io/docs/tutorials/security/apparmor/
+  seccomp-kind-ubuntu-latest-job:
+    name: "Restrict a Container's Access to Resources with AppArmor job"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: "os fingerprinti  ng"
+      run: hostnamectl status
+      # https://kind.sigs.k8s.io/docs/user/quick-start/
+    - name: "Restrict a Container's Access to Resources with AppArmor" 
+      run: |
+        curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
+        chmod +x ./kind 
+        mv ./kind /usr/local/bin/kind    
+        # Default cluster context name is `kind`.
+        kind create cluster 
+        kind get clusters       
+        kubectl config get-contexts 
+        kubectl cluster-info --context kind-kind
+        docker ps
+        # Kubernetes version is at least v1.4 -- Kubernetes support for AppArmor was added in v1.4.
+        # verify the Kubelet version of nodes
+        kubectl get nodes -o=jsonpath=$'{range .items[*]}{@.metadata.name}: {@.status.nodeInfo.kubeletVersion}\n{end}'
+        # check whether the module is enabled
+        cat /sys/module/apparmor/parameters/enabled
+  
