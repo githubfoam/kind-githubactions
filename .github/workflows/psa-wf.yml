@@ -1,4 +1,4 @@
-name: "seccomp kind Ubuntu CI workflow"
+name: "Pod Security Standards kind Ubuntu CI workflow"
 
 
 on:
@@ -12,8 +12,8 @@ on:
 
 jobs:
 
-# https://kubernetes.io/docs/tutorials/security/seccomp/
-  seccomp-kind-ubuntu-latest-job:
+# https://kubernetes.io/docs/tutorials/security/cluster-level-pss/
+  psa-kind-ubuntu-latest-job:
     name: "Restrict a Container's Syscalls with seccomp job"
     runs-on: ubuntu-latest
     steps:
@@ -21,7 +21,7 @@ jobs:
     - name: "os fingerprinti  ng"
       run: hostnamectl status
       # https://kind.sigs.k8s.io/docs/user/quick-start/
-    - name: "Download example seccomp profiles" 
+    - name: "Apply Pod Security Standards at the Cluster Level" 
       run: |
         curl -Lo ./kind https://kind.sigs.k8s.io/dl/v0.11.1/kind-linux-amd64
         chmod +x ./kind 
@@ -31,16 +31,9 @@ jobs:
         # kind get clusters       
         # kubectl config get-contexts 
         # kubectl cluster-info --context kind-kind
-        mkdir ./profiles
-        curl -L -o profiles/audit.json https://k8s.io/examples/pods/security/seccomp/profiles/audit.json
-        curl -L -o profiles/violation.json https://k8s.io/examples/pods/security/seccomp/profiles/violation.json
-        curl -L -o profiles/fine-grained.json https://k8s.io/examples/pods/security/seccomp/profiles/fine-grained.json
-        ls profiles
-        curl -L -O https://k8s.io/examples/pods/security/seccomp/kind.yaml
-        kind create cluster --config=kind.yaml
+        # Create a cluster with no Pod Security Standards applied:
+        kind create cluster --name psa-wo-cluster-pss --image kindest/node:v1.23.0
         kind get clusters       
         kubectl config get-contexts 
         # kubectl cluster-info --context kind-kind
-        docker ps
-
   
